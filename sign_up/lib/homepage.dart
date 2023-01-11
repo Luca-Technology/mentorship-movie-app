@@ -8,18 +8,30 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+class LoginStrings {
+  final String assetImageText = 'assets/images/fundo_pipoca.jpg';
+  final String titleText = 'Filmes Flutter';
+  final String subtitleText = 'Sign Up';
+  final String errorEmailText = 'Can\'t be empty';
+  final String emailHintText = 'name@example.com';
+  final String emailLabelText = 'E-mail';
+  final String errorTextPassword = 'Must have at least 8 characters';
+  final String passwordLabelText = 'Password';
+  final String buttonText = 'Sign in';
+}
+
 class _HomePageState extends State<HomePage> {
+  LoginStrings loginStrings = LoginStrings();
   bool isObscure = true;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   String? errorTextEmail;
   String? errorTextPassword;
   final nodePassword = FocusNode();
-  final String textPassword = 'Must have at least 8 characters';
 
   String? get errorTextEmailOn {
     if (emailController.value.text.isEmpty) {
-      return 'Can\'t be empty';
+      return loginStrings.errorEmailText;
     } else {
       return null;
     }
@@ -41,7 +53,7 @@ class _HomePageState extends State<HomePage> {
               width: sizeWidth,
               height: sizeHeight,
               child: Image.asset(
-                'assets/images/fundo_pipoca.jpg',
+                loginStrings.assetImageText,
                 fit: BoxFit.cover,
                 opacity: kImageOpacity,
               ),
@@ -52,15 +64,16 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Center(
-                      child: Text('Filmes Flutter', style: kTitleTextStyle),
+                    Center(
+                      child:
+                          Text(loginStrings.titleText, style: kTitleTextStyle),
                     ),
                     const SizedBox(
                       height: 50.0,
                     ),
                     Center(
                       child: Text(
-                        'Sign Up',
+                        loginStrings.subtitleText,
                         style: TextStyle(
                             fontSize: 30.0, color: Colors.blue.shade100),
                       ),
@@ -73,8 +86,8 @@ class _HomePageState extends State<HomePage> {
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
-                        hintText: 'name@example.com',
-                        labelText: 'E-mail',
+                        hintText: loginStrings.emailHintText,
+                        labelText: loginStrings.emailLabelText,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: Colors.grey.shade600, width: 2.0),
@@ -118,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                             });
                           },
                         ),
-                        labelText: 'Password',
+                        labelText: loginStrings.passwordLabelText,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: Colors.grey.shade600, width: 2.0),
@@ -133,7 +146,8 @@ class _HomePageState extends State<HomePage> {
                       onChanged: (value) {
                         setState(() {
                           (passwordController.value.text.length < 8)
-                              ? errorTextPassword = textPassword
+                              ? errorTextPassword =
+                                  loginStrings.errorTextPassword
                               : errorTextPassword = null;
                         });
                       },
@@ -159,11 +173,9 @@ class _HomePageState extends State<HomePage> {
                           : (() {
                               setState(() {});
                             }),
-                      child: const Text(
-                        'Sign in',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
+                      child: Text(
+                        loginStrings.buttonText,
+                        style: kButtonStyle,
                       ),
                     ),
                   ],
