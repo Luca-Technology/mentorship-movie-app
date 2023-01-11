@@ -9,19 +9,18 @@ class HomePage extends StatefulWidget {
 }
 
 class LoginStrings {
-  final String assetImageText = 'assets/images/fundo_pipoca.jpg';
-  final String titleText = 'Filmes Flutter';
-  final String subtitleText = 'Sign Up';
-  final String errorEmailText = 'Can\'t be empty';
-  final String emailHintText = 'name@example.com';
-  final String emailLabelText = 'E-mail';
-  final String errorTextPassword = 'Must have at least 8 characters';
-  final String passwordLabelText = 'Password';
-  final String buttonText = 'Sign in';
+  static const assetImageText = 'assets/images/fundo_pipoca.jpg';
+  static const titleText = 'Filmes Flutter';
+  static const subtitleText = 'Sign Up';
+  static const errorEmailText = 'Can\'t be empty';
+  static const emailHintText = 'name@example.com';
+  static const emailLabelText = 'E-mail';
+  static const errorTextPassword = 'Must have at least 8 characters';
+  static const passwordLabelText = 'Password';
+  static const buttonText = 'Sign in';
 }
 
 class _HomePageState extends State<HomePage> {
-  LoginStrings loginStrings = LoginStrings();
   bool isObscure = true;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -31,7 +30,7 @@ class _HomePageState extends State<HomePage> {
 
   String? get errorTextEmailOn {
     if (emailController.value.text.isEmpty) {
-      return loginStrings.errorEmailText;
+      return LoginStrings.errorEmailText;
     } else {
       return null;
     }
@@ -39,8 +38,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final sizeWidth = MediaQuery.of(context).size.width;
-    final sizeHeight = MediaQuery.of(context).size.height;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
       body: GestureDetector(
@@ -50,10 +48,10 @@ class _HomePageState extends State<HomePage> {
         child: Stack(
           children: [
             SizedBox(
-              width: sizeWidth,
-              height: sizeHeight,
+              width: size.width,
+              height: size.height,
               child: Image.asset(
-                loginStrings.assetImageText,
+                LoginStrings.assetImageText,
                 fit: BoxFit.cover,
                 opacity: kImageOpacity,
               ),
@@ -64,16 +62,16 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Center(
+                    const Center(
                       child:
-                          Text(loginStrings.titleText, style: kTitleTextStyle),
+                          Text(LoginStrings.titleText, style: kTitleTextStyle),
                     ),
                     const SizedBox(
                       height: 50.0,
                     ),
                     Center(
                       child: Text(
-                        loginStrings.subtitleText,
+                        LoginStrings.subtitleText,
                         style: TextStyle(
                             fontSize: 30.0, color: Colors.blue.shade100),
                       ),
@@ -86,8 +84,8 @@ class _HomePageState extends State<HomePage> {
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
-                        hintText: loginStrings.emailHintText,
-                        labelText: loginStrings.emailLabelText,
+                        hintText: LoginStrings.emailHintText,
+                        labelText: LoginStrings.emailLabelText,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: Colors.grey.shade600, width: 2.0),
@@ -108,9 +106,7 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       onEditingComplete: () {
-                        setState(() {
-                          FocusScope.of(context).requestFocus(nodePassword);
-                        });
+                        FocusScope.of(context).requestFocus(nodePassword);
                       },
                     ),
                     const SizedBox(
@@ -131,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                             });
                           },
                         ),
-                        labelText: loginStrings.passwordLabelText,
+                        labelText: LoginStrings.passwordLabelText,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: Colors.grey.shade600, width: 2.0),
@@ -147,14 +143,12 @@ class _HomePageState extends State<HomePage> {
                         setState(() {
                           (passwordController.value.text.length < 8)
                               ? errorTextPassword =
-                                  loginStrings.errorTextPassword
+                                  LoginStrings.errorTextPassword
                               : errorTextPassword = null;
                         });
                       },
                       onEditingComplete: () {
-                        setState(() {
-                          FocusScope.of(context).requestFocus(FocusNode());
-                        });
+                        FocusScope.of(context).requestFocus(FocusNode());
                       },
                     ),
                     const SizedBox(
@@ -173,8 +167,8 @@ class _HomePageState extends State<HomePage> {
                           : (() {
                               setState(() {});
                             }),
-                      child: Text(
-                        loginStrings.buttonText,
+                      child: const Text(
+                        LoginStrings.buttonText,
                         style: kButtonStyle,
                       ),
                     ),
