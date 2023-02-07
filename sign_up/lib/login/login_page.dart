@@ -1,26 +1,15 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import '../constants.dart';
+import 'login_strings.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class LoginStrings {
-  static const assetImageText = 'assets/images/fundo_pipoca.jpg';
-  static const titleText = 'Filmes Flutter';
-  static const subtitleText = 'Sign Up';
-  static const errorEmailText = 'Can\'t be empty';
-  static const emailHintText = 'name@example.com';
-  static const emailLabelText = 'E-mail';
-  static const errorTextPassword = 'Must have at least 8 characters';
-  static const passwordLabelText = 'Password';
-  static const buttonText = 'Sign in';
-}
-
-class _HomePageState extends State<HomePage> {
+class _LoginPageState extends State<LoginPage> {
   bool isObscure = true;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
